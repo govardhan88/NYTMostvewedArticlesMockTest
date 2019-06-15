@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.EditText
@@ -64,6 +65,7 @@ class NYTArticlesListFragment : BaseFragment<NYTArticlesViewState, NYTArticlesLi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_nyt_articles_list, container, false)
         binding.viewModel = viewModel
+        binding.activity=activity as AppCompatActivity
         binding.setLifecycleOwner(this)
         return binding.root
     }
@@ -76,9 +78,6 @@ class NYTArticlesListFragment : BaseFragment<NYTArticlesViewState, NYTArticlesLi
     }
 
     private fun initView() {
-        img_more.setOnClickListener {
-            this.activity!!.openOptionsMenu()
-        }
         setRecyclerView(ArrayList<NYTArticleItem>())
         viewModel.getNYTArticlesList()
             .observe(this, Observer { it?.let { nytArticlesAdapter.setAppList(it?.results!!) } })

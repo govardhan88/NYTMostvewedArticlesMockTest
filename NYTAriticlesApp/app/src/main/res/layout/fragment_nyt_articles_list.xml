@@ -5,6 +5,7 @@
 	
 	<data>
 		
+		<variable name="activity" type="android.support.v7.app.AppCompatActivity"/>
 		<variable
 			name="viewModel"
 			type="com.govardhan.nytimesarticles.ui.nytarticles.NYTArticlesListFragmentViewModel" />
@@ -70,6 +71,7 @@
 					android:layout_alignParentRight="true"
 					android:layout_centerVertical="true"
 					android:layout_marginLeft="20dp"
+					android:onClick='@{() -> activity.openOptionsMenu()}'
 					android:src="@drawable/menu" />
 			
 			</RelativeLayout>
