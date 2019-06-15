@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:bind="http://schemas.android.com/tools">
+	
+	<data>
+		<variable name="activity" type="android.support.v7.app.AppCompatActivity"/>
+		<variable
+			name="nytArticleParsed"
+			type="com.govardhan.nytimesarticles.data.model.NYTArticlesParsedData" />
+		
+		<variable
+			name="webViewObserver"
+			type="com.govardhan.nytimesarticles.common.utils.WebviewObserver" />
+		
+		<variable
+			name="nytArticlesItem"
+			type="com.govardhan.nytimesarticles.data.remote.pojo.NYTArticleItem" />
+	</data>
+	
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@android:color/darker_gray"
+		android:orientation="vertical">
+		
+		<android.support.v7.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal|top"
+			android:background="?attr/colorPrimary"
+			android:minHeight="?attr/actionBarSize">
+			
+			<TextView
+				android:id="@+id/toolbar_title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@{nytArticlesItem.source}"
+				android:textColor="@android:color/white"
+				android:textSize="17sp"
+				android:textStyle="bold|normal" />
+			
+			<ImageView
+				android:id="@+id/toolbar_back"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="left"
+				android:src="@drawable/ic_back_arrow"
+				android:onClick='@{() -> activity.onBackPressed()}'
+				android:tint="@color/colorWhite" />
+		
+		</android.support.v7.widget.Toolbar>
+		
+		<RelativeLayout
+			android:id="@+id/banner_container"
+			android:layout_width="match_parent"
+			android:layout_height="260dp"
+			android:layout_below="@+id/toolbar">
+			
+			<ImageView
+				android:id="@+id/newsBanner"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="fitCenter"
+				bind:imageUrl="@{nytArticleParsed.bannerImage}" />
+			
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_alignParentBottom="true"
+				android:background="@drawable/gradient">
+				
+				<TextView
+					android:id="@+id/newsTitle"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="10dp"
+					android:text="@{nytArticlesItem.title}"
+					android:textColor="@android:color/white"
+					android:textSize="16sp"
+					android:textStyle="normal" />
+				
+				<TextView
+					android:id="@+id/newsCategoryTimeText"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/newsTitle"
+					android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+					android:drawableTint="@color/colorWhite"
+					android:editable="false"
+					android:gravity="center_vertical"
+					android:paddingLeft="10dp"
+					android:paddingBottom="10dp"
+					android:singleLine="true"
+					android:text="@{nytArticlesItem.publishedDate}"
+					android:textColor="@android:color/white"
+					android:textSize="12sp"
+					android:textStyle="normal" />
+				
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/newsTitle"
+					android:layout_alignParentRight="true"
+					android:drawableLeft="@android:drawable/ic_menu_view"
+					android:drawableTint="@color/colorWhite"
+					android:gravity="center_vertical"
+					android:paddingLeft="10dp"
+					android:paddingRight="10dp"
+					android:paddingBottom="10dp"
+					android:singleLine="true"
+					android:text="@{String.valueOf(nytArticlesItem.views)}"
+					android:textColor="@android:color/white"
+					android:textSize="12sp"
+					android:textStyle="normal" />
+			
+			</RelativeLayout>
+		
+		</RelativeLayout>
+		
+		<ScrollView
+			android:id="@+id/scrollView"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/banner_container"
+			android:fillViewport="true"
+			android:scrollbars="vertical">
+			
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+				
+				<android.support.v7.widget.CardView
+					android:id="@+id/contentLayout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="15dp"
+					android:layout_marginBottom="15dp"
+					app:cardElevation="5dp">
+					
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical"
+						android:padding="15dp">
+						
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center"
+							android:padding="10dp"
+							android:text="@{nytArticlesItem.memberAbstract}"
+							android:textSize="16sp"
+							android:textStyle="italic" />
+						
+						
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:text="@{nytArticlesItem.byline}"
+							android:textColor="@android:color/black"
+							android:textSize="16sp" />
+						
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:paddingTop="10dp"
+							android:paddingBottom="10dp"
+							android:text="Location"
+							android:textSize="14sp" />
+						
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:text="@{nytArticleParsed.geoFacet}"
+							android:textColor="@android:color/black"
+							android:textSize="16sp" />
+						
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:paddingTop="10dp"
+							android:paddingBottom="10dp"
+							android:text="Quoted by"
+							android:textSize="14sp" />
+						
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:text="@{nytArticleParsed.pesFacet}"
+							android:textColor="@android:color/black"
+							android:textSize="16sp" />
+						
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:paddingTop="10dp"
+							android:paddingBottom="10dp"
+							android:text="Organisations"
+							android:textSize="14sp" />
+						
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:text="@{nytArticleParsed.orgFacet}"
+							android:textColor="@android:color/black"
+							android:textSize="16sp" />
+						
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:paddingTop="10dp"
+							android:paddingBottom="10dp"
+							android:text="Des"
+							android:textSize="14sp" />
+						
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:text="@{nytArticleParsed.desFacet}"
+							android:textColor="@android:color/black"
+							android:textSize="16sp" />
+						
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center"
+							android:paddingTop="10dp"
+							android:paddingBottom="10dp"
+							android:text="@{nytArticlesItem.adxKeywords}"
+							android:textSize="13sp"
+							
+							android:textStyle="italic" />
+					
+					
+					</LinearLayout>
+				</android.support.v7.widget.CardView>
+				
+				<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_below="@id/contentLayout">
+					
+					<WebView
+						android:id="@+id/newsDetails"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:focusable="false"
+						android:padding="10dp"
+						android:scrollbars="vertical"
+						android:text=""
+						android:textColor="@android:color/black"
+						android:textSize="16sp"
+						android:textStyle="normal"
+						bind:loadUrl="@{nytArticlesItem.url}"
+						bind:setWebViewClient="@{webViewObserver.webViewClient}" />
+					
+					<com.github.ybq.android.spinkit.SpinKitView
+						android:id="@+id/spin_kit"
+						style="@style/SpinKitView.Large.Circle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_centerInParent="true"
+						app:SpinKit_Color="@color/colorAccent"
+						bind:setVsibility="@{!webViewObserver.isHideProgress}" />
+				</RelativeLayout>
+			</RelativeLayout>
+		
+		</ScrollView>
+	
+	</RelativeLayout>
+</layout>

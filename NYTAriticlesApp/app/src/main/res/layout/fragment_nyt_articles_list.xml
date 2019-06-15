@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:bind="http://schemas.android.com/tools">
+	
+	<data>
+		
+		<variable
+			name="viewModel"
+			type="com.govardhan.nytimesarticles.ui.nytarticles.NYTArticlesListFragmentViewModel" />
+	</data>
+	
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="#d3d3d3"
+		android:paddingLeft="5dp"
+		android:paddingRight="5dp">
+		
+		<android.support.v7.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal|top"
+			android:background="?attr/colorPrimary"
+			android:minHeight="?attr/actionBarSize">
+			
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:paddingTop="15dp"
+				android:paddingBottom="15dp">
+				
+				<ImageView
+					android:id="@+id/img_menu"
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:layout_centerVertical="true"
+					android:src="@drawable/nav_menu"
+					android:tint="#FFF" />
+				
+				<TextView
+					android:id="@+id/toolbar_title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerInParent="true"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="10dp"
+					android:layout_toRightOf="@+id/img_menu"
+					android:text="NY Times Most Popular"
+					android:textColor="#FFF"
+					android:textSize="20sp"
+					android:textStyle="normal" />
+				
+				<ImageView
+					android:id="@+id/img_search"
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="10dp"
+					android:layout_toLeftOf="@+id/img_more"
+					android:padding="6dp"
+					android:src="@drawable/search_icon"
+					android:tint="#FFF" />
+				
+				<ImageView
+					android:id="@+id/img_more"
+					android:layout_width="20dp"
+					android:layout_height="30dp"
+					android:layout_alignParentRight="true"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="20dp"
+					android:src="@drawable/menu" />
+			
+			</RelativeLayout>
+		</android.support.v7.widget.Toolbar>
+		
+		
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/article_recycler"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_below="@+id/toolbar"
+			android:background="#FAFAFA"
+			android:paddingBottom="20dp" />
+		
+		<com.github.ybq.android.spinkit.SpinKitView
+			android:id="@+id/spin_kit"
+			style="@style/SpinKitView.Large.Circle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			app:SpinKit_Color="@color/colorAccent"
+			android:visibility="@{viewModel.progress}" />
+	</RelativeLayout>
+
+</layout>
