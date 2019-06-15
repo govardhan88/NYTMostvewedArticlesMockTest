@@ -1,31 +1,28 @@
-Perform the following steps to import your project.
-
-## Step 1: Install git for Windows
-It can be downloaded for free from git-scm.com.
-
-Most settings available during the installation process should be compatible with Android studio. Just choose the settings you deem the most appropriate.
-
-## Step 2: Link git executable to Android Studio
-Open Android Studio and got to Settings. In the Setting dialog open the page Version Control / Git. Here define the path to the git executable you have just installed.
+# How to open and run the application on android studio
+First of all download the android studio and project from the link below.
 
 
 
-## Step 3: Get the Path to your Repository from Github
-Go to the GitHub page and get the HTTPs path to your repository
+There are the steps to open the project in android studio,
 
-ie., https://github.com/govardhan88/NYTMostvewedArticlesMockTest.git
+Open Android Studio,
+select File >New >Import Project.
+Locate a project you downloaded , select the project’s root directory and click OK.
+![alt text](https://mobikul.com/wp-content/uploads/2016/09/Screenshot_1.png)
 
-## Step 4: Import the Git project to Android Studio
-Go to Android Studio and go to Menu / VCS / Checkout from Version Control / Git
+Select project from existing sources and click Ok.
+Your project will be open in the android studio.
+Then Connect your device.
+Note: Your USB debugging must on to run your app
+How to on the developer option in your android device,
+Go to Settings > General > About phone.
+Then scroll and select Software information > Build number. Now rapidly tap on ‘Build Number’ five times and you will see the message ‘You are now a developer!’ The critical thing is to get to ‘Build number’, and then tap rapidly until you see the message.
 
+How to enable the USB Debugging,
+Go back and now access the Developer options menu, check ‘USB debugging‘ and click OK on the prompt.
 
-
-Paste the HTTPS path you obtained from GitHub in the previous step and click on [Clone].
-
-
-
-Provide your GitHub username and password.
-
-
-
-Now the project should be imported to Android Studio and you should be able to commit and push future changes back to GitHub.
+After connecting your device with enabling the USB debugging, Now you can run the app on your android device by clicking the run button of android studio,
+![alt text](https://mobikul.com/wp-content/uploads/2016/09/Screenshot_2.png)
+Now select your device to run the app,screenshot_3Click OK button to run your application.
+![alt text](https://mobikul.com/wp-content/uploads/2016/09/Screenshot_3.png)
+Click OK button to run your application.
